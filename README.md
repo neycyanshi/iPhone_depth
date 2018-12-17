@@ -34,7 +34,7 @@ Depth visualization in real time using AV Foundation.
 
 Blending a background image with a mask created from depth.
 
-[//]: # ![](README_resources/blend.gif)
+<!-- # ![](README_resources/blend.gif) -->
 
 ### Depth from Camera Roll
 
@@ -48,7 +48,7 @@ Please try this after taking **a picture with the Camera app using the PORTRAIT 
 
 Background removal demo using Portrait Effect Matte (or Portrait Effect Matte). 
 
-[//]: # ![](README_resources/portraitmatte.gif)
+<!-- # ![](README_resources/portraitmatte.gif) -->
 
 Plaease try this after taking **a picture of a HUMAN with PORTRAIT mode**.
 
@@ -58,7 +58,7 @@ Available in iOS 12 or later.
 
 Depth visualization on ARKit. The depth on ARKit is available only when using `ARFaceTrackingConfiguration`.
 
-[//]: # ![](README_resources/arkit-depth.gif)
+<!-- # ![](README_resources/arkit-depth.gif) -->
 
 ### 2D image in 3D space
 
