@@ -19,7 +19,7 @@ class RealtimeDepthMaskViewController: UIViewController {
 
     private var videoCapture: VideoCapture!
     private var currentCameraType: CameraType = .front(true)
-    private let serialQueue = DispatchQueue(label: "com.shu223.iOS-Depth-Sampler.queue")
+    private let serialQueue = DispatchQueue(label: "com.shi.depthSampler.queue")
     private var currentCaptureSize: CGSize = CGSize.zero
 
     private var renderer: MetalRenderer!

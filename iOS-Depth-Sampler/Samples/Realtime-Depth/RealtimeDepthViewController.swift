@@ -19,7 +19,7 @@ class RealtimeDepthViewController: UIViewController {
 
     private var videoCapture: VideoCapture!
     var currentCameraType: CameraType = .back(true)
-    private let serialQueue = DispatchQueue(label: "com.shu223.iOS-Depth-Sampler.queue")
+    private let serialQueue = DispatchQueue(label: "com.shi.depthSampler.queue")
 
     private var renderer: MetalRenderer!
     private var depthImage: CIImage?

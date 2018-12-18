@@ -35,22 +35,21 @@ class VideoCapture: NSObject {
     private var videoConnection: AVCaptureConnection!
     private var previewLayer: AVCaptureVideoPreviewLayer?
     
-    private let dataOutputQueue = DispatchQueue(label: "com.shu223.dataOutputQueue")
+    private let dataOutputQueue = DispatchQueue(label: "com.shi.depthSampler.queue")
 
     var imageBufferHandler: ImageBufferHandler?
     var syncedDataBufferHandler: SynchronizedDataBufferHandler?
 
-    // プロパティで保持しておかないとdelegate呼ばれない
-    // AVCaptureDepthDataOutputはプロパティで保持しなくても大丈夫（CaptureSessionにaddOutputするからだと思う）
+    // It is not called delegate unless it is retained in the property
+    // AVCaptureDepthDataOutput is not in property（because it addOutput to CaptureSession）
     private var dataOutputSynchronizer: AVCaptureDataOutputSynchronizer!
     
-    // プロパティに保持しておかなくてもOKだが、AVCaptureSynchronizedDataCollectionからデータを取り出す際にあると便利
+    // Not necessary, but easy to retrieve data from AVCaptureSynchronizedDataCollection
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let depthDataOutput = AVCaptureDepthDataOutput()
     private let metadataOutput = AVCaptureMetadataOutput()
     
-    init(cameraType: CameraType, preferredSpec: VideoSpec?, previewContainer: CALayer?)
-    {
+    init(cameraType: CameraType, preferredSpec: VideoSpec?, previewContainer: CALayer?) {
         super.init()
         
         captureSession.beginConfiguration()
