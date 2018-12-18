@@ -73,7 +73,7 @@ A demo to render a 2D image in 3D space.
 
 ## Author
 
-Modified by **Shi Yan**, thanks to Shuichi Tsutsumi.
+Modified by **Shi Yan**, thanks to **Shuichi Tsutsumi**.
 
 Student in Tsinghua University.
 
