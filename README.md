@@ -19,7 +19,7 @@ You need `Certificate`, `Identifiers`, `Devices`, and finally `Provisioning Prof
 See [Test app on iPhone](https://www.cnblogs.com/workky/p/6059299.html) for details.
 Open `iOS-Depth-Sampler.xcworkspace` with Xcode 10.1 and build it!
 
-It can **NOT** run on **Simulator**. (Because it uses Metal.)
+It can **NOT** run on **Simulator**. (Because it uses **Metal**.)
 
 
 ## Contents
