@@ -22,7 +22,7 @@ Open `iOS-Depth-Sampler.xcworkspace` with Xcode 10.1 and build it!
 It can **NOT** run on **Simulator**. (Because it uses **Metal**.)
 
 
-## Contents
+## Contents and Features
 
 ### Real-time Depth
 
