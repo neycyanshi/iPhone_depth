@@ -11,7 +11,7 @@ Code examples of Depth APIs in iOS
 
 ## Requirement
 
-Use devices which has a **dual camera** (e.g. iPhone 8 Plus) or a **TrueDepth camera** (e.g. iPhone X)
+Use devices which has a **dual camera** (e.g. iPhone 8 Plus) or a **TrueDepth camera** (e.g. iPhone X, iPhone XS, iPhone XR)
 
 ## How to build
 
