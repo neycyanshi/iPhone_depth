@@ -10,7 +10,9 @@ import MetalKit
 import AVFoundation
 
 class RealtimeDepthViewController: UIViewController {
-
+    
+    // MARK: Properties
+    // previewView and mtkView are displayed on UI, previewView is raw BGRA video in AVCaptureSession, mtkView is processed depth frames visualized by MetalRenderer.
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var mtkView: MTKView!
     @IBOutlet weak var filterSwitch: UISwitch!
@@ -45,6 +47,7 @@ class RealtimeDepthViewController: UIViewController {
         videoCapture.syncedDataBufferHandler = { [weak self] videoPixelBuffer, depthData, face in
             guard let self = self else { return }
             
+            // Receive image frame from VideoCapture to self.videoImage
             self.videoImage = CIImage(cvPixelBuffer: videoPixelBuffer)
 
             var useDisparity: Bool = false
@@ -54,7 +57,9 @@ class RealtimeDepthViewController: UIViewController {
                 applyHistoEq = self.equalizeSwitch.isOn
             })
             
+            // Receive depth frame frome VideoCapture to self.depthImage
             self.serialQueue.async {
+                // Original depthData here
                 guard let depthData = useDisparity ? depthData?.convertToDisparity() : depthData else { return }
                 
                 guard let ciImage = depthData.depthDataMap.transformedImage(targetSize: self.currentDrawableSize, rotationAngle: 0) else { return }
@@ -84,7 +89,7 @@ class RealtimeDepthViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    // MARK: - Actions
+    // MARK: Actions
     
     @IBAction func cameraSwitchBtnTapped(_ sender: UIButton) {
         switch currentCameraType {

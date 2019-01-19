@@ -54,7 +54,7 @@ class VideoCapture: NSObject {
         
         captureSession.beginConfiguration()
         
-        // inputPriorityだと深度とれない
+        // inputPriority can not be depth
         captureSession.sessionPreset = AVCaptureSession.Preset.photo
         
         setupCaptureVideoDevice(with: cameraType)
@@ -94,8 +94,7 @@ class VideoCapture: NSObject {
                 metadataOutput.metadataObjectTypes = [.face]
             }
 
-            
-            // synchronize outputs
+            // synchronize outputs using func dataOutputSynchronizer() in extension from class AVCaptureDataOutputSynchronizerDelegate
             dataOutputSynchronizer = AVCaptureDataOutputSynchronizer(dataOutputs: [videoDataOutput, depthDataOutput, metadataOutput])
             dataOutputSynchronizer.setDelegate(self, queue: dataOutputQueue)
         }
@@ -187,7 +186,7 @@ extension VideoCapture: AVCaptureVideoDataOutputSampleBufferDelegate {
 //        print("\(self.classForCoder)/" + #function)
     }
     
-    // synchronizer使ってる場合は呼ばれない
+    // Not called when using synchronizer
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let imageBufferHandler = imageBufferHandler, connection == videoConnection
         {
@@ -205,7 +204,7 @@ extension VideoCapture: AVCaptureDepthDataOutputDelegate {
         print("\(self.classForCoder)/\(#function)")
     }
     
-    // synchronizer使ってる場合は呼ばれない
+    // Not called when using synchronizer
     func depthDataOutput(_ output: AVCaptureDepthDataOutput, didOutput depthData: AVDepthData, timestamp: CMTime, connection: AVCaptureConnection) {
         print("\(self.classForCoder)/\(#function)")
     }
@@ -213,6 +212,7 @@ extension VideoCapture: AVCaptureDepthDataOutputDelegate {
 
 extension VideoCapture: AVCaptureDataOutputSynchronizerDelegate {
     
+    // Called when an AVCaptureDataOutputSynchronizer instance outputs synchronized data from one or more data outputs.
     func dataOutputSynchronizer(_ synchronizer: AVCaptureDataOutputSynchronizer, didOutput synchronizedDataCollection: AVCaptureSynchronizedDataCollection) {
         
         guard let syncedVideoData = synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData else { return }
@@ -229,7 +229,7 @@ extension VideoCapture: AVCaptureDataOutputSynchronizerDelegate {
             depthData = nil
         }
 
-        // 顔のある位置のしきい値を求める
+        // Find the threshold of a position with a face
         let syncedMetaData = synchronizedDataCollection.synchronizedData(for: metadataOutput) as? AVCaptureSynchronizedMetadataObjectData
         var face: AVMetadataObject? = nil
         if let firstFace = syncedMetaData?.metadataObjects.first {
