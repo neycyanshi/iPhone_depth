@@ -41,6 +41,7 @@ class RealtimeDepthViewController: UIViewController {
                                     preferredSpec: nil,
                                     previewContainer: previewView.layer)
         
+        // Inline implement main statement of closure. (CVPixelBuffer, AVDepthData?, AVMetadataObject?) -> Void
         videoCapture.syncedDataBufferHandler = { [weak self] videoPixelBuffer, depthData, face in
             guard let self = self else { return }
             
